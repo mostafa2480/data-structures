@@ -1,64 +1,60 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 struct Node
 {
-	int data;
+	int value;
 	struct Node *ch1;
 	struct Node *ch2;
 };
 
-struct Node* create_tree(int depth);
-int int_pow(int base, int exponent);
+struct Node *create_tree(int depth, int value);
+void free_tree(struct Node *node);
 
 int main()
 {
-	struct Node *root = create_tree(3);
-	if (root == NULL) return 1;
-
+	struct Node *root = create_tree(4, 1);
+	if (root == NULL)
+	{
+		fprintf(stderr, "Memory allocation failed\n");
+		return 1;
+	}
+	free_tree(root);
 	return 0;
 }
 
-struct Node* create_tree(int depth)
+struct Node *create_tree(int depth, int value)
 {
-	int node_count = int_pow(2, depth) - 1;
-	struct Node *nodes[node_count];
-	struct Node *root = malloc(sizeof(struct Node));
-	if (root == NULL) return NULL;
+	struct Node *node = malloc(sizeof(struct Node));
+	if (node == NULL) return NULL;
 
-	nodes[0] = root;
+	node->value = value;
+	node->ch1 = NULL;
+	node->ch2 = NULL;
 
-	int value = 1;
-	root->data = value++;
-	for (int i = 0; i < depth - 1; i++)
+	if (depth == 1) return node;
+
+	node->ch1 = create_tree(depth - 1, value + 1);
+	if (node->ch1 == NULL)
 	{
-		int index = int_pow(2, i) - 1;
-		for (int j = index; j < 2 * index + 1; j++)
-		{
-			nodes[j]->ch1 = malloc(sizeof(struct Node));
-			if (nodes[j]->ch1 == NULL) return NULL;
-			nodes[j]->ch2 = malloc(sizeof(struct Node));
-			if (nodes[j]->ch2 == NULL) return NULL;
-
-			nodes[j]->ch1->data = value++;
-			nodes[j]->ch2->data = value++;
-
-			nodes[2 * j + 1] = nodes[j]->ch1;
-			nodes[2 * j + 2] = nodes[j]->ch2;
-		}
+		free(node);
+		return NULL;
+	}
+	node->ch2 = create_tree(depth - 1, value + 2);
+	if (node->ch2 == NULL)
+	{
+		free_tree(node->ch1);
+		free(node);
+		return NULL;
 	}
 
-	for (int i = node_count - int_pow(2, depth - 1); i < node_count; i++)
-	{
-		nodes[i]->ch1 = NULL;
-		nodes[i]->ch2 = NULL;
-	}
-
-	return root;
+	return node;
 }
 
-int int_pow(int base, int exponent)
+void free_tree(struct Node *node)
 {
-	int result = 1;
-	for (int i = 0; i < exponent; i++) result *= base;
-	return result;
+	if (node == NULL) return;
+	free_tree(node->ch1);
+	free_tree(node->ch2);
+	free(node);
 }
