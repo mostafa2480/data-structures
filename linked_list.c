@@ -18,6 +18,16 @@ int main()
 	return 0;
 }
 
+struct LinkedList *create_list()
+{
+	struct LinkedList *linked_list = malloc(sizeof(struct LinkedList));
+	if (linked_list == NULL) exit(1);
+
+	linked_list->head = NULL;
+	linked_list->tail = NULL;
+	return linked_list;
+}
+
 int push_front(struct LinkedList *linked_list, int value)
 {
 	if (linked_list == NULL) return 0;
