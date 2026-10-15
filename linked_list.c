@@ -144,3 +144,73 @@ int pop_back(struct LinkedList *linked_list)
 	linked_list->tail->next = NULL;
 	return 1;
 }
+
+int insert_before(struct LinkedList *linked_list, struct Node *node, int value)
+{
+	if (linked_list == NULL) return 0;
+
+	if (linked_list->head == NULL)
+	{
+		if (node != NULL) return 0;
+		
+		linked_list->head = malloc(sizeof(struct Node));
+		if (linked_list->head == NULL) exit(1);
+
+		linked_list->tail = linked_list->head;
+		linked_list->head->prev = NULL;
+		linked_list->head->next = NULL;
+		linked_list->head->value = value;
+		return 1;
+	}
+
+	if (node == NULL) return 0;
+
+	struct Node *new_node = malloc(sizeof(struct Node));
+	if (new_node == NULL) exit(1);
+
+	new_node->prev = node->prev;
+	new_node->next = node;
+
+	node->prev = new_node;
+	if (new_node->prev != NULL) new_node->prev->next = new_node;
+	else linked_list->head = new_node;
+
+	new_node->value = value;
+
+	return 1;
+}
+
+int insert_after(struct LinkedList *linked_list, struct Node *node, int value)
+{
+	if (linked_list == NULL) return 0;
+
+	if (linked_list->head == NULL)
+	{
+		if (node != NULL) return 0;
+		
+		linked_list->head = malloc(sizeof(struct Node));
+		if (linked_list->head == NULL) exit(1);
+
+		linked_list->tail = linked_list->head;
+		linked_list->head->prev = NULL;
+		linked_list->head->next = NULL;
+		linked_list->head->value = value;
+		return 1;
+	}
+
+	if (node == NULL) return 0;
+
+	struct Node *new_node = malloc(sizeof(struct Node));
+	if (new_node == NULL) exit(1);
+
+	new_node->prev = node;
+	new_node->next = node->next;
+
+	node->next = new_node;
+	if (new_node->next != NULL) new_node->next->prev = new_node;
+	else linked_list->tail = new_node;
+
+	new_node->value = value;
+
+	return 1;
+}
