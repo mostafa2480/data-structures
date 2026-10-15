@@ -20,12 +20,12 @@ int main()
 
 int push_front(struct LinkedList *linked_list, int value)
 {
-	if (linked_list == NULL) return -1;
+	if (linked_list == NULL) return 0;
 
 	if (linked_list->head == NULL)
 	{
 		linked_list->head = malloc(sizeof(struct Node));
-		if (linked_list->head == NULL) return 0;
+		if (linked_list->head == NULL) exit(1);
 
 		linked_list->tail = linked_list->head;
 		linked_list->head->prev = NULL;
@@ -34,7 +34,7 @@ int push_front(struct LinkedList *linked_list, int value)
 	else
 	{
 		linked_list->head->prev = malloc(sizeof(struct Node));
-		if (linked_list->head->prev == NULL) return 0;
+		if (linked_list->head->prev == NULL) exit(1);
 
 		linked_list->head->prev->prev = NULL;
 		linked_list->head->prev->next = linked_list->head;
@@ -47,12 +47,12 @@ int push_front(struct LinkedList *linked_list, int value)
 
 int push_back(struct LinkedList *linked_list, int value)
 {
-	if (linked_list == NULL) return -1;
+	if (linked_list == NULL) return 0;
 
 	if (linked_list->tail == NULL)
 	{
 		linked_list->tail = malloc(sizeof(struct Node));
-		if (linked_list->tail == NULL) return 0;
+		if (linked_list->tail == NULL) exit(1);
 
 		linked_list->head = linked_list->tail;
 		linked_list->tail->prev = NULL;
@@ -61,7 +61,7 @@ int push_back(struct LinkedList *linked_list, int value)
 	else
 	{
 		linked_list->tail->next = malloc(sizeof(struct Node));
-		if (linked_list->tail->next == NULL) return 0;
+		if (linked_list->tail->next == NULL) exit(1);
 
 		linked_list->tail->next->prev = linked_list->tail;
 		linked_list->tail->next->next = NULL;
