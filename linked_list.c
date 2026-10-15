@@ -45,6 +45,12 @@ void clear_list(struct LinkedList *linked_list)
 	linked_list->tail = NULL;
 }
 
+void free_list(struct LinkedList *linked_list)
+{
+	clear_list(linked_list);
+	free(linked_list);
+}
+
 int push_front(struct LinkedList *linked_list, int value)
 {
 	if (linked_list == NULL) return 0;
