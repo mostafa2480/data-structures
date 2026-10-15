@@ -28,6 +28,23 @@ struct LinkedList *create_list()
 	return linked_list;
 }
 
+void clear_list(struct LinkedList *linked_list)
+{
+	if (linked_list == NULL) return;
+
+	if (linked_list->head == NULL) return;
+
+	struct Node *temp;
+	while (linked_list->head != NULL)
+	{
+		temp = linked_list->head;
+		linked_list->head = linked_list->head->next;
+		free(temp);
+	}
+
+	linked_list->tail = NULL;
+}
+
 int push_front(struct LinkedList *linked_list, int value)
 {
 	if (linked_list == NULL) return 0;
