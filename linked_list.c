@@ -214,3 +214,39 @@ int insert_after(struct LinkedList *linked_list, struct Node *node, int value)
 
 	return 1;
 }
+
+int delete_node(struct LinkedList *linked_list, struct Node *node)
+{
+	if (linked_list == NULL) return -1;
+
+	if (node == NULL) return 0;
+
+	if (node == linked_list->head)
+	{
+		if (node == linked_list->tail)
+		{
+			free(linked_list->head);
+			linked_list->head = NULL;
+			linked_list->tail = NULL;
+			return 1;
+		}
+
+		linked_list->head = linked_list->head->next;
+		free(linked_list->head->prev);
+		linked_list->head->prev = NULL;
+		return 1;
+	}
+
+	if (node == linked_list->tail)
+	{
+		linked_list->tail = linked_list->tail->prev;
+		free(linked_list->tail->next);
+		linked_list->tail->next = NULL;
+		return 1;
+	}
+
+	node->prev->next = node->next;
+	node->next->prev = node->prev;
+	free(node);
+	return 1;
+}
