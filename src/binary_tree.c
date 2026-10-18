@@ -1,27 +1,5 @@
 #include <stdlib.h>
-#include <stdio.h>
-
-typedef struct Node
-{
-	int value;
-	struct Node *ch1;
-	struct Node *ch2;
-} Node;
-
-Node *create_tree(int depth, int value);
-void free_tree(Node *node);
-
-int main()
-{
-	Node *root = create_tree(4, 1);
-	if (root == NULL)
-	{
-		fprintf(stderr, "Memory allocation failed\n");
-		return 1;
-	}
-	free_tree(root);
-	return 0;
-}
+#include "binary_tree.h"
 
 Node *create_tree(int depth, int value)
 {

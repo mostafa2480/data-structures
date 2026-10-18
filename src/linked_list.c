@@ -1,22 +1,5 @@
 #include <stdlib.h>
-
-typedef struct Node
-{
-	int value;
-	struct Node *prev;
-	struct Node *next;
-} Node;
-
-typedef struct
-{
-	Node *head;
-	Node *tail;
-} LinkedList;
-
-int main()
-{
-	return 0;
-}
+#include "linked_list.h"
 
 LinkedList *create_list()
 {
