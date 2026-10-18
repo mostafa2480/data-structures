@@ -1,19 +1,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct Node
+typedef struct Node
 {
 	int value;
 	struct Node *ch1;
 	struct Node *ch2;
-};
+} Node;
 
-struct Node *create_tree(int depth, int value);
-void free_tree(struct Node *node);
+Node *create_tree(int depth, int value);
+void free_tree(Node *node);
 
 int main()
 {
-	struct Node *root = create_tree(4, 1);
+	Node *root = create_tree(4, 1);
 	if (root == NULL)
 	{
 		fprintf(stderr, "Memory allocation failed\n");
@@ -23,9 +23,9 @@ int main()
 	return 0;
 }
 
-struct Node *create_tree(int depth, int value)
+Node *create_tree(int depth, int value)
 {
-	struct Node *node = malloc(sizeof(struct Node));
+	Node *node = malloc(sizeof(Node));
 	if (node == NULL) return NULL;
 
 	node->value = value;
@@ -51,7 +51,7 @@ struct Node *create_tree(int depth, int value)
 	return node;
 }
 
-void free_tree(struct Node *node)
+void free_tree(Node *node)
 {
 	if (node == NULL) return;
 	free_tree(node->ch1);
