@@ -1,3 +1,6 @@
+#ifndef BINARY_SEARCH_TREE_H
+#define BINARY_SEARCH_TREE_H
+
 typedef struct bst_Node
 {
 	int value;
@@ -15,3 +18,5 @@ void bst_traverse_preorder(bst_Node *root, void (*callback)(bst_Node *node));
 void bst_traverse_inorder(bst_Node *root, void (*callback)(bst_Node *node));
 void bst_traverse_postorder(bst_Node *root, void (*callback)(bst_Node *node));
 void bst_traverse_level_order(bst_Node *root, void (*callback)(bst_Node *node));
+
+#endif

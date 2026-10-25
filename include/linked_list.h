@@ -1,3 +1,6 @@
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
+
 typedef struct Node
 {
 	int value;
@@ -21,3 +24,5 @@ int pop_back(LinkedList *list);
 int insert_before(LinkedList *list, Node *node, int value);
 int insert_after(LinkedList *list, Node *node, int value);
 int delete_node(LinkedList *list, Node *node);
+
+#endif
