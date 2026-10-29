@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "linked_list.h"
 
-LinkedList *create_list()
+LinkedList *list_create_list()
 {
 	LinkedList *list = malloc(sizeof(LinkedList));
 	if (list == NULL) exit(1);
@@ -11,13 +11,13 @@ LinkedList *create_list()
 	return list;
 }
 
-void clear_list(LinkedList *list)
+void list_clear_list(LinkedList *list)
 {
 	if (list == NULL) return;
 
 	if (list->head == NULL) return;
 
-	Node *temp;
+	list_Node *temp;
 	while (list->head != NULL)
 	{
 		temp = list->head;
@@ -28,19 +28,19 @@ void clear_list(LinkedList *list)
 	list->tail = NULL;
 }
 
-void free_list(LinkedList *list)
+void list_free_list(LinkedList *list)
 {
-	clear_list(list);
+	list_clear_list(list);
 	free(list);
 }
 
-int push_front(LinkedList *list, int value)
+int list_push_front(LinkedList *list, int value)
 {
 	if (list == NULL) return 0;
 
 	if (list->head == NULL)
 	{
-		list->head = malloc(sizeof(Node));
+		list->head = malloc(sizeof(list_Node));
 		if (list->head == NULL) exit(1);
 
 		list->tail = list->head;
@@ -49,7 +49,7 @@ int push_front(LinkedList *list, int value)
 	}
 	else
 	{
-		list->head->prev = malloc(sizeof(Node));
+		list->head->prev = malloc(sizeof(list_Node));
 		if (list->head->prev == NULL) exit(1);
 
 		list->head->prev->prev = NULL;
@@ -61,13 +61,13 @@ int push_front(LinkedList *list, int value)
 	return 1;
 }
 
-int push_back(LinkedList *list, int value)
+int list_push_back(LinkedList *list, int value)
 {
 	if (list == NULL) return 0;
 
 	if (list->tail == NULL)
 	{
-		list->tail = malloc(sizeof(Node));
+		list->tail = malloc(sizeof(list_Node));
 		if (list->tail == NULL) exit(1);
 
 		list->head = list->tail;
@@ -76,7 +76,7 @@ int push_back(LinkedList *list, int value)
 	}
 	else
 	{
-		list->tail->next = malloc(sizeof(Node));
+		list->tail->next = malloc(sizeof(list_Node));
 		if (list->tail->next == NULL) exit(1);
 
 		list->tail->next->prev = list->tail;
@@ -88,7 +88,7 @@ int push_back(LinkedList *list, int value)
 	return 1;
 }
 
-int pop_front(LinkedList *list)
+int list_pop_front(LinkedList *list)
 {
 	if (list == NULL) return -1;
 
@@ -108,7 +108,7 @@ int pop_front(LinkedList *list)
 	return 1;
 }
 
-int pop_back(LinkedList *list)
+int list_pop_back(LinkedList *list)
 {
 	if (list == NULL) return -1;
 
@@ -128,7 +128,7 @@ int pop_back(LinkedList *list)
 	return 1;
 }
 
-int insert_before(LinkedList *list, Node *node, int value)
+int list_insert_before(LinkedList *list, list_Node *node, int value)
 {
 	if (list == NULL) return 0;
 
@@ -136,7 +136,7 @@ int insert_before(LinkedList *list, Node *node, int value)
 	{
 		if (node != NULL) return 0;
 		
-		list->head = malloc(sizeof(Node));
+		list->head = malloc(sizeof(list_Node));
 		if (list->head == NULL) exit(1);
 
 		list->tail = list->head;
@@ -148,7 +148,7 @@ int insert_before(LinkedList *list, Node *node, int value)
 
 	if (node == NULL) return 0;
 
-	Node *new_node = malloc(sizeof(Node));
+	list_Node *new_node = malloc(sizeof(list_Node));
 	if (new_node == NULL) exit(1);
 
 	new_node->prev = node->prev;
@@ -163,7 +163,7 @@ int insert_before(LinkedList *list, Node *node, int value)
 	return 1;
 }
 
-int insert_after(LinkedList *list, Node *node, int value)
+int list_insert_after(LinkedList *list, list_Node *node, int value)
 {
 	if (list == NULL) return 0;
 
@@ -171,7 +171,7 @@ int insert_after(LinkedList *list, Node *node, int value)
 	{
 		if (node != NULL) return 0;
 		
-		list->head = malloc(sizeof(Node));
+		list->head = malloc(sizeof(list_Node));
 		if (list->head == NULL) exit(1);
 
 		list->tail = list->head;
@@ -183,7 +183,7 @@ int insert_after(LinkedList *list, Node *node, int value)
 
 	if (node == NULL) return 0;
 
-	Node *new_node = malloc(sizeof(Node));
+	list_Node *new_node = malloc(sizeof(list_Node));
 	if (new_node == NULL) exit(1);
 
 	new_node->prev = node;
@@ -198,7 +198,7 @@ int insert_after(LinkedList *list, Node *node, int value)
 	return 1;
 }
 
-int delete_node(LinkedList *list, Node *node)
+int list_delete_node(LinkedList *list, list_Node *node)
 {
 	if (list == NULL) return -1;
 
