@@ -4,7 +4,7 @@
 LinkedList *list_create_list()
 {
 	LinkedList *list = malloc(sizeof(LinkedList));
-	if (list == NULL) exit(1);
+	if (list == NULL) return NULL;
 
 	list->head = NULL;
 	list->tail = NULL;
@@ -41,7 +41,7 @@ int list_push_front(LinkedList *list, int value)
 	if (list->head == NULL)
 	{
 		list->head = malloc(sizeof(list_Node));
-		if (list->head == NULL) exit(1);
+		if (list->head == NULL) return -1;
 
 		list->tail = list->head;
 		list->head->prev = NULL;
@@ -50,7 +50,7 @@ int list_push_front(LinkedList *list, int value)
 	else
 	{
 		list->head->prev = malloc(sizeof(list_Node));
-		if (list->head->prev == NULL) exit(1);
+		if (list->head->prev == NULL) return -1;
 
 		list->head->prev->prev = NULL;
 		list->head->prev->next = list->head;
@@ -68,7 +68,7 @@ int list_push_back(LinkedList *list, int value)
 	if (list->tail == NULL)
 	{
 		list->tail = malloc(sizeof(list_Node));
-		if (list->tail == NULL) exit(1);
+		if (list->tail == NULL) return -1;
 
 		list->head = list->tail;
 		list->tail->prev = NULL;
@@ -77,7 +77,7 @@ int list_push_back(LinkedList *list, int value)
 	else
 	{
 		list->tail->next = malloc(sizeof(list_Node));
-		if (list->tail->next == NULL) exit(1);
+		if (list->tail->next == NULL) return -1;
 
 		list->tail->next->prev = list->tail;
 		list->tail->next->next = NULL;
@@ -137,7 +137,7 @@ int list_insert_before(LinkedList *list, list_Node *node, int value)
 		if (node != NULL) return 0;
 		
 		list->head = malloc(sizeof(list_Node));
-		if (list->head == NULL) exit(1);
+		if (list->head == NULL) return -1;
 
 		list->tail = list->head;
 		list->head->prev = NULL;
@@ -149,7 +149,7 @@ int list_insert_before(LinkedList *list, list_Node *node, int value)
 	if (node == NULL) return 0;
 
 	list_Node *new_node = malloc(sizeof(list_Node));
-	if (new_node == NULL) exit(1);
+	if (new_node == NULL) return -1;
 
 	new_node->prev = node->prev;
 	new_node->next = node;
@@ -172,7 +172,7 @@ int list_insert_after(LinkedList *list, list_Node *node, int value)
 		if (node != NULL) return 0;
 		
 		list->head = malloc(sizeof(list_Node));
-		if (list->head == NULL) exit(1);
+		if (list->head == NULL) return -1;
 
 		list->tail = list->head;
 		list->head->prev = NULL;
@@ -184,7 +184,7 @@ int list_insert_after(LinkedList *list, list_Node *node, int value)
 	if (node == NULL) return 0;
 
 	list_Node *new_node = malloc(sizeof(list_Node));
-	if (new_node == NULL) exit(1);
+	if (new_node == NULL) return -1;
 
 	new_node->prev = node;
 	new_node->next = node->next;
