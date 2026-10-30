@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 void run_binary_search_tree_tests();
+void run_linked_list_tests();
 
 int main()
 {
@@ -9,6 +10,7 @@ int main()
 	printf("\n======================\n\n");
 
 	run_binary_search_tree_tests();
+	run_linked_list_tests();
 
 	printf("\n======================");
 	printf("\n    ALL TESTS PASSED  ");
